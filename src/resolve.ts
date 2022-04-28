@@ -1,18 +1,32 @@
+import InvalidVariableNameError from "./InvalidVariableNameError";
 import UnassignedVariableError from "./UnassignedVariableError";
 
-const variablePattern = /(?<!\\)\$\{([^${} ]+)\}/g;
+const variablePattern = /(?<!\\)\$\{(\w+)\}/g;
+
+const validateVariableName = (variableName: string) =>
+  variableName.match(/^[a-zA-Z]\w*$/);
+
+
+const validateAllVariableNames = (variables: Record<string, any>) => {
+  for (const name in variables) {
+    if (!validateVariableName(name)) {
+      throw new InvalidVariableNameError(name);
+    }
+  }
+}
 
 /**
  * Takes a `template` text including variables, and replaces the variables with the values definid
  * in the `variables` map.
- * 
+ *
  * Variables within the template should follow syntax like: ${foo}.
- * 
+ *
  * @param template The template text where variables can be used to get replaced.
  * @param variables A map from variables names to the values to be replaced.
  * @returns The result from replacing template text with variable values from the map.
  */
 export const resolve = (template: string, variables: Record<string, any>) => {
+  validateAllVariableNames(variables);
   const matchIterator = template.matchAll(variablePattern);
   let matchResult = matchIterator.next();
   let result = "";
@@ -36,4 +50,3 @@ export const resolve = (template: string, variables: Record<string, any>) => {
 
   return result;
 };
-

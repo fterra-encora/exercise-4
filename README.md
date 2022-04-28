@@ -33,3 +33,7 @@ console.log(result); // Outputs: My name is Fernando and I'm 38.
 If a variable appears in the template text but is not defined in the variables map, it throws an error.
 
 Variable syntax can be escaped by using a `\` (backslach) before it.
+
+Variable names must follow these rules:
+- Variable names may contain letters, digits (0-9) or the underscore character _.
+- Variable names must begin with a letter from A-Z or the underscore _ character. Either lowercase or uppercase letters are acceptable.
