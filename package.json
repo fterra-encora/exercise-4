@@ -1,0 +1,14 @@
+{
+  "name": "exercise-4",
+  "version": "0.1.0",
+  "description": "A simple template engine function",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}

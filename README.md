@@ -1,2 +1,2 @@
 # exercise-4
-A simple template engine function
+A simple template engine function.
