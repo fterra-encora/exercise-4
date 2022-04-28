@@ -31,3 +31,5 @@ console.log(result); // Outputs: My name is Fernando and I'm 38.
 
 ### Notes
 If a variable appears in the template text but is not defined in the variables map, it throws an error.
+
+Variable syntax can be escaped by using a `\` (backslach) before it.

@@ -1,6 +1,6 @@
 import UnassignedVariableError from "./UnassignedVariableError";
 
-const variablePattern = /\$\{([^${} ]+)\}/g;
+const variablePattern = /(?<!\\)\$\{([^${} ]+)\}/g;
 
 /**
  * Takes a `template` text including variables, and replaces the variables with the values definid
