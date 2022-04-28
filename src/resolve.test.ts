@@ -70,4 +70,21 @@ describe("resolve", () => {
       );
     }
   );
+  it("should ignore escaped variable syntax and remove the escape character", () => {
+    const template = "before \\${escaped} after";
+    const variables = {};
+    expect(resolve(template, variables)).toEqual("before ${escaped} after");
+  });
+  it("should not throw any error if an escaped variable was not assigned a value", () => {
+    const template = "\\${escaped}";
+    const variables = {};
+    expect(() => resolve(template, variables)).not.toThrow();
+  });
+  it("should handle mixed escaped and unescaped variables properly", () => {
+    const template = "1: ${unescaped}, 2: \\${escaped}.";
+    const variables = {
+      unescaped: "value"
+    };
+    expect(resolve(template, variables)).toEqual("1: value, 2: ${escaped}.");
+  });
 });
