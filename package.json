@@ -1,9 +1,10 @@
 {
   "name": "exercise-4",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple template engine function",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc --outDir dist"
   },
   "author": "",
   "license": "ISC",
