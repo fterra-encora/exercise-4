@@ -1,4 +1,4 @@
-import resolve from ".";
+import { resolve } from "./resolve";
 import UnassignedVariableError from "./UnassignedVariableError";
 
 describe("resolve", () => {

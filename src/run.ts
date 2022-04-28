@@ -1,4 +1,4 @@
-import resolve from ".";
+import { resolve } from ".";
 
 const result = resolve(
   "My name is ${name} and I'm ${age}. ${${escaped}}. Name again: ${name}.",
