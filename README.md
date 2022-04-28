@@ -15,7 +15,7 @@ You can use variables on the template by using syntax like: `${foo}`.
 The second parameter is the variables map, where the key will be looked for when resolving the template, and the variable will be replaced with the respective value.
 
 ### Return
-The result from replacing the template text with variable values from the map.
+The result from replacing all the annotated variables in the template text with their respective values from the map.
 
 ## Example
 ```
@@ -32,7 +32,7 @@ console.log(result); // Outputs: My name is Fernando and I'm 38.
 ### Notes
 If a variable appears in the template text but is not defined in the variables map, it throws an error.
 
-Variable syntax can be escaped by using a `\` (backslach) before it.
+Variable syntax can be escaped by using a `\` (backslash) before it.
 
 Variable names must follow these rules:
 - Variable names may contain letters, digits (0-9) or the underscore character _.
