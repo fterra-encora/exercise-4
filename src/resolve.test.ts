@@ -62,6 +62,15 @@ describe("resolve", () => {
       InvalidVariableSyntaxError
     );
   });
+  it("should throw an error when variable start with number", () => {
+    const template = "This will be kept as is: ${1wrong}}.";
+    const variables = {
+      "1wrong": "value",
+    };
+    expect(() => resolve(template, variables)).toThrow(
+      InvalidVariableSyntaxError
+    );
+  });
   it("should ignore escaped variable syntax and remove the escape character", () => {
     const template = "before \\${escaped} after";
     const variables = {};
