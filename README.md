@@ -32,7 +32,8 @@ console.log(result); // Outputs: My name is Fernando and I'm 38.
 ### Notes
 If a variable appears in the template text but is not defined in the variables map, it throws an error.
 
-Variable syntax can be escaped by using a `\` (backslash) before it.
+Variable syntax can be escaped by using a \ (backslash) before it.
+Reminder: inserting a backslash in a Javascript string actually requires two backslashes. Example: `"\\${escapedSyntax}"`
 
 Variable names must follow these rules:
 - Variable names may contain letters, digits (0-9) or the underscore character _.

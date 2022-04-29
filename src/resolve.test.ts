@@ -1,4 +1,4 @@
-import InvalidVariableNameError from "./InvalidVariableNameError";
+import InvalidVariableSyntaxError from "./InvalidVariableSyntaxError";
 import { resolve } from "./resolve";
 import UnassignedVariableError from "./UnassignedVariableError";
 
@@ -39,43 +39,35 @@ describe("resolve", () => {
     const variables = {};
     expect(() => resolve(template, variables)).toThrow(UnassignedVariableError);
   });
-  it("should dismiss variable name with white space", () => {
+  it("should dismiss incomplete variable syntax", () => {
     const template = "This will be kept as is: ${as is}.";
     const variables = {};
     expect(resolve(template, variables)).toEqual(template);
   });
   it.each(["$", "{"])(
-    "should dismiss variable name with unallowed characters (%s)",
+    "should throw an error when variable name contains unallowed characters (%s)",
     (unallowedChar) => {
       const variableName = "a" + unallowedChar + "b";
       const template = "This will be kept as is: ${" + variableName + "}.";
       const variables = {};
-      expect(resolve(template, variables)).toEqual(template);
-    }
-  );
-  it("should dismiss empty variable name", () => {
-    const template = "This will be kept as is: ${}.";
-    const variables = {};
-    expect(resolve(template, variables)).toEqual(template);
-  });
-  it.each(["1name", "$name", ""])(
-    "should thorow an error when the variables map contains an invalid variable name (%s)",
-    (variableName) => {
-      const template = "Template";
-      const variables = {
-        [variableName]: "value",
-      };
       expect(() => resolve(template, variables)).toThrow(
-        InvalidVariableNameError
+        InvalidVariableSyntaxError
       );
     }
   );
+  it("should throw an error when variable name is empty", () => {
+    const template = "This will be kept as is: ${}.";
+    const variables = {};
+    expect(() => resolve(template, variables)).toThrow(
+      InvalidVariableSyntaxError
+    );
+  });
   it("should ignore escaped variable syntax and remove the escape character", () => {
     const template = "before \\${escaped} after";
     const variables = {};
     expect(resolve(template, variables)).toEqual("before ${escaped} after");
   });
-  it("should not throw any error if an escaped variable was not assigned a value", () => {
+  it("should not throw any error if variable within escaped variable syntax was not assigned a value", () => {
     const template = "\\${escaped}";
     const variables = {};
     expect(() => resolve(template, variables)).not.toThrow();
@@ -83,7 +75,7 @@ describe("resolve", () => {
   it("should handle mixed escaped and unescaped variables properly", () => {
     const template = "1: ${unescaped}, 2: \\${escaped}.";
     const variables = {
-      unescaped: "value"
+      unescaped: "value",
     };
     expect(resolve(template, variables)).toEqual("1: value, 2: ${escaped}.");
   });
